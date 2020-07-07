@@ -429,13 +429,6 @@ let list_max_string = function
   | h :: t -> string_of_int (list_max_helper h t)
 
 (* Exercise: is_bst [✭✭✭✭] *)
-(* let rec is_bst_helper lower upper = function
-  | Leaf -> true
-  | Node { value; left; right } ->
-      if value <= lower || value >= upper then false
-      else is_bst_helper lower value left && is_bst_helper value upper right
- *)
-
 type bst_result = Empty | Node of int * int | Invalid
 
 let rec is_bst_helper = function
