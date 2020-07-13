@@ -1,25 +1,20 @@
 (* Exercise: list expressions [✭] *)
 
-;;
-[ 1; 2; 3; 4; 5 ]
+let _ = [ 1; 2; 3; 4; 5 ]
 
-;;
-[ 1; 2; 3; 4; 5 ]
+let _ = [ 1; 2; 3; 4; 5 ]
 
-;;
-[ 1 ] @ [ 2; 3; 4 ] @ [ 5 ]
+let _ = [ 1 ] @ [ 2; 3; 4 ] @ [ 5 ]
 
 (* Exercise: product [✭✭] *)
 let rec product lst = match lst with [] -> 1 | h :: t -> h * product t
 
-;;
-assert (product [ 1; 2; 3 ] = 6)
+let _ = assert (product [ 1; 2; 3 ] = 6)
 
 (* Exercise: concat [✭✭, optional] *)
 let rec concat lst = match lst with [] -> "" | h :: t -> h ^ concat t
 
-;;
-assert (concat [ "ab"; "cd"; "ef" ] = "abcdef")
+let _ = assert (concat [ "ab"; "cd"; "ef" ] = "abcdef")
 
 (* Exercise: product test [✭✭, optional] *)
 (* Done. See exercises_test.ml *)
@@ -28,37 +23,29 @@ assert (concat [ "ab"; "cd"; "ef" ] = "abcdef")
 let first_element_bigred lst =
   match lst with [] -> false | h :: _ -> h = "bigred"
 
-;;
-assert (first_element_bigred [ "bigred"; "hi" ])
+let _ = assert (first_element_bigred [ "bigred"; "hi" ])
 
-;;
-assert (not (first_element_bigred [ "hi"; "world" ]))
+let _ = assert (not (first_element_bigred [ "hi"; "world" ]))
 
 let two_or_four_elements lst =
   match lst with [ _; _ ] -> true | [ _; _; _; _ ] -> true | _ -> false
 
-;;
-assert (two_or_four_elements [ 1; 2 ])
+let _ = assert (two_or_four_elements [ 1; 2 ])
 
-;;
-assert (two_or_four_elements [ 1; 2; 3; 4 ])
+let _ = assert (two_or_four_elements [ 1; 2; 3; 4 ])
 
-;;
-assert (not (two_or_four_elements [ 1; 2; 3 ]))
+let _ = assert (not (two_or_four_elements [ 1; 2; 3 ]))
 
 (* Exercise: library [✭✭✭] *)
 let fifth_in_list lst = if List.length lst < 5 then 0 else List.nth lst 4
 
-;;
-assert (fifth_in_list [ 1; 2; 3; 4; 5 ] = 5)
+let _ = assert (fifth_in_list [ 1; 2; 3; 4; 5 ] = 5)
 
-;;
-assert (fifth_in_list [ 1; 2; 3; 4 ] = 0)
+let _ = assert (fifth_in_list [ 1; 2; 3; 4 ] = 0)
 
 let sorted_descending lst = List.rev (List.sort Stdlib.compare lst)
 
-;;
-assert (sorted_descending [ 3; 2; 4; 1 ] = [ 4; 3; 2; 1 ])
+let _ = assert (sorted_descending [ 3; 2; 4; 1 ] = [ 4; 3; 2; 1 ])
 
 (* Exercise: library test [✭✭✭, optional] *)
 (* See exercises_test.ml *)
@@ -68,20 +55,16 @@ let rec take n lst =
   if n > 0 then match lst with [] -> [] | h :: t -> h :: take (n - 1) t
   else []
 
-;;
-assert (take 3 [ 1; 2; 3; 4; 5 ] = [ 1; 2; 3 ])
+let _ = assert (take 3 [ 1; 2; 3; 4; 5 ] = [ 1; 2; 3 ])
 
-;;
-assert (take 3 [ 1; 2 ] = [ 1; 2 ])
+let _ = assert (take 3 [ 1; 2 ] = [ 1; 2 ])
 
 let rec drop n lst =
   if n <= 0 then lst else match lst with [] -> [] | _ :: t -> drop (n - 1) t
 
-;;
-assert (drop 3 [ 1; 2; 3; 4; 5 ] = [ 4; 5 ])
+let _ = assert (drop 3 [ 1; 2; 3; 4; 5 ] = [ 4; 5 ])
 
-;;
-assert (drop 3 [ 4; 5 ] = [])
+let _ = assert (drop 3 [ 4; 5 ] = [])
 
 (* Exercise: take drop tail [✭✭✭✭, recommended] *)
 
@@ -106,11 +89,9 @@ let rec take_acc n acc lst =
 
 let rec take_tr n lst = List.rev (take_acc n [] lst)
 
-;;
-take_tr 1_000_000 longlist
+let _ = take_tr 1_000_000 longlist
 
-;;
-drop 1_000_000 longlist
+let _ = drop 1_000_000 longlist
 
 (* Exercise: unimodal [✭✭✭] *)
 let rec unimodal_helper lst decreasing =
@@ -123,23 +104,17 @@ let rec unimodal_helper lst decreasing =
 
 let unimodal lst = unimodal_helper lst false
 
-;;
-assert (unimodal [ 1; 2; 3; 2; 1 ])
+let _ = assert (unimodal [ 1; 2; 3; 2; 1 ])
 
-;;
-assert (unimodal [ 1; 2; 3; 3; 2 ])
+let _ = assert (unimodal [ 1; 2; 3; 3; 2 ])
 
-;;
-assert (unimodal [ 1; 1; 2; 1 ])
+let _ = assert (unimodal [ 1; 1; 2; 1 ])
 
-;;
-assert (unimodal [ 3; 2; 1 ])
+let _ = assert (unimodal [ 3; 2; 1 ])
 
-;;
-assert (unimodal [ 1; 2; 3 ])
+let _ = assert (unimodal [ 1; 2; 3 ])
 
-;;
-assert (not (unimodal [ 2; 1; 2 ]))
+let _ = assert (not (unimodal [ 2; 1; 2 ]))
 
 (* Exercise: powerset [✭✭✭] *)
 let rec add_to_elements x lst =
@@ -150,14 +125,11 @@ let rec powerset lst =
   | [] -> [ [] ]
   | x :: s -> add_to_elements x (powerset s) @ powerset s
 
-;;
-powerset [ 3 ]
+let _ = powerset [ 3 ]
 
-;;
-powerset [ 2; 3 ]
+let _ = powerset [ 2; 3 ]
 
-;;
-powerset [ 1; 2; 3 ]
+let _ = powerset [ 1; 2; 3 ]
 
 (* Exercise: print int list rec [✭✭] *)
 let rec print_int_list lst =
@@ -168,8 +140,7 @@ let rec print_int_list lst =
       print_endline "";
       print_int_list t
 
-;;
-print_int_list [ 1; 2; 3 ]
+let _ = print_int_list [ 1; 2; 3 ]
 
 (* Exercise: print int list iter [✭✭] *)
 let print_int_list' lst =
@@ -179,8 +150,7 @@ let print_int_list' lst =
       print_endline "")
     lst
 
-;;
-print_int_list' [ 4; 5; 6 ]
+let _ = print_int_list' [ 4; 5; 6 ]
 
 (* Exercise: student [✭✭] *)
 type student = { first_name : string; last_name : string; gpa : float }
@@ -190,8 +160,7 @@ let student_name stu = (stu.first_name, stu.last_name)
 let create_student ~first_name:a ~last_name:b ~gpa =
   { first_name = a; last_name = b; gpa }
 
-;;
-student_name (create_student "John" "Smith" 3.0)
+let _ = student_name (create_student "John" "Smith" 3.0)
 
 (* Exercise: pokerecord [✭✭] *)
 type poketype = Normal | Fire | Water
@@ -208,17 +177,13 @@ let safe_hd lst = match lst with [] -> None | h :: _ -> Some h
 let rec safe_tl lst =
   match lst with [] -> None | [ t ] -> Some t | _ :: t -> safe_tl t
 
-;;
-safe_hd []
+let _ = safe_hd []
 
-;;
-safe_hd [ 1; 2; 3 ]
+let _ = safe_hd [ 1; 2; 3 ]
 
-;;
-safe_tl []
+let _ = safe_tl []
 
-;;
-safe_tl [ 1; 2; 3 ]
+let _ = safe_tl [ 1; 2; 3 ]
 
 (* Exercise: pokefun [✭✭✭] *)
 
@@ -230,8 +195,7 @@ let rec max_hp_helper lst cur_poke =
 
 let rec max_hp lst = match lst with [] -> None | h :: t -> max_hp_helper t h
 
-;;
-max_hp [ charizard; squirtle ]
+let _ = max_hp [ charizard; squirtle ]
 
 (* Exercise: date before [✭✭] *)
 
@@ -242,11 +206,9 @@ let is_before d1 d2 =
       | y2, m2, d2 ->
           y1 < y2 || (y1 = y2 && m1 < m2) || (y1 = y1 && m1 = m2 && d1 < d2) )
 
-;;
-assert (not (is_before (1, 2, 3) (1, 2, 3)))
+let _ = assert (not (is_before (1, 2, 3) (1, 2, 3)))
 
-;;
-assert (not (is_before (1, 2, 3) (1, 1, 1)))
+let _ = assert (not (is_before (1, 2, 3) (1, 1, 1)))
 
 (* Exercise: earliest date [✭✭✭] *)
 
@@ -259,10 +221,10 @@ let rec earliest_helper lst cur_min =
 
 let earliest lst = match lst with [] -> None | h :: t -> earliest_helper t h
 
-;;
-assert (
-  earliest [ (3, 2, 1); (4, 3, 2); (4, 1, 2); (1, 2, 1); (1, 2, 2) ]
-  = Some (1, 2, 1) )
+let _ =
+  assert (
+    earliest [ (3, 2, 1); (4, 3, 2); (4, 1, 2); (1, 2, 1); (1, 2, 2) ]
+    = Some (1, 2, 1) )
 
 (* Exercise: assoc list [✭] *)
 
@@ -276,11 +238,9 @@ let rec lookup k = function
 
 let d = insert 1 "one" (insert 2 "two" (insert 3 "three" []))
 
-;;
-lookup 2 d
+let _ = lookup 2 d
 
-;;
-lookup 4 d
+let _ = lookup 4 d
 
 (* Exercise: cards [✭✭] *)
 type suit = Clubs | Diamonds | Hearts | Spades
@@ -343,11 +303,9 @@ let quadrant : int * int -> quad option =
   | Pos, Neg -> Some IV
   | _, _ -> None
 
-;;
-assert (quadrant (1, 1) = Some I)
+let _ = assert (quadrant (1, 1) = Some I)
 
-;;
-assert (quadrant (1, 0) = None)
+let _ = assert (quadrant (1, 0) = None)
 
 (* Exercise: quadrant when [✭✭] *)
 let quadrant_when : int * int -> quad option = function
@@ -357,11 +315,9 @@ let quadrant_when : int * int -> quad option = function
   | x, y when x > 0 && y < 0 -> Some IV
   | x, y -> None
 
-;;
-assert (quadrant_when (1, 1) = Some I)
+let _ = assert (quadrant_when (1, 1) = Some I)
 
-;;
-assert (quadrant_when (1, 0) = None)
+let _ = assert (quadrant_when (1, 0) = None)
 
 (* Exercise: depth [✭✭] *)
 type 'a tree = Leaf | Node of 'a node
@@ -392,8 +348,7 @@ let rec depth = function
   | Leaf -> 0
   | Node { left; right } -> 1 + max (depth left) (depth right)
 
-;;
-assert (depth ta = 2)
+let _ = assert (depth ta = 2)
 
 (* Exercise: shape [✭✭✭] *)
 let rec same_shape_helper = function
@@ -405,11 +360,9 @@ let rec same_shape_helper = function
 
 let same_shape a b = same_shape_helper (a, b)
 
-;;
-assert (same_shape ta tb)
+let _ = assert (same_shape ta tb)
 
-;;
-assert (not (same_shape ta tc))
+let _ = assert (not (same_shape ta tc))
 
 (* Exercise: list max exn [✭✭] *)
 let rec list_max_helper cur_max = function
@@ -420,8 +373,7 @@ let list_max = function
   | [] -> raise (Failure "list_max")
   | h :: t -> list_max_helper h t
 
-;;
-list_max [ 4; 3; 5; 2 ]
+let _ = list_max [ 4; 3; 5; 2 ]
 
 (* Exercise: list max exn string [✭✭] *)
 let list_max_string = function
@@ -444,17 +396,13 @@ let rec is_bst_helper = function
 
 let is_bst root = match is_bst_helper root with Invalid -> false | _ -> true
 
-;;
-assert (is_bst ta)
+let _ = assert (is_bst ta)
 
-;;
-assert (not (is_bst tb))
+let _ = assert (not (is_bst tb))
 
-;;
-assert (is_bst tc)
+let _ = assert (is_bst tc)
 
-;;
-assert (not (is_bst td))
+let _ = assert (not (is_bst td))
 
 (* Exercise: quadrant poly [✭✭] *)
 let sign x = if x > 0 then `Pos else if x < 0 then `Neg else `Zero
@@ -467,8 +415,6 @@ let quadrant (x, y) =
   | `Pos, `Neg -> Some `IV
   | _, _ -> None
 
-;;
-assert (quadrant (1, 1) = Some `I)
+let _ = assert (quadrant (1, 1) = Some `I)
 
-;;
-assert (quadrant (1, 0) = None)
+let _ = assert (quadrant (1, 0) = None)

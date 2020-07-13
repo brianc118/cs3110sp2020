@@ -10,28 +10,22 @@ let fourth = twice square
 
 let ( $ ) f x = f x
 
-;;
-square $ 2 + 2
+let _ = square $ 2 + 2
 
-;;
-square 2 + 2
+let _ = square 2 + 2
 
 let ( @@ ) f g x = x |> g |> f
 
-;;
-(String.length @@ string_of_int) 1
+let _ = (String.length @@ string_of_int) 1
 
-;;
-(String.length @@ string_of_int) 12
+let _ = (String.length @@ string_of_int) 12
 
 (* Exercise: repeat [✭✭] *)
 let rec repeat f n x = if n = 0 then x else f (repeat f (n - 1) x)
 
-;;
-repeat double 0 1
+let _ = repeat double 0 1
 
-;;
-repeat double 10 1
+let _ = repeat double 10 1
 
 (* Exercise: product [✭] *)
 let product_left = List.fold_left ( *. ) 1.0
@@ -56,8 +50,7 @@ let sum_cube_odd n =
        (fun x -> x * x * x)
        (List.filter (fun x -> x mod 2 = 1) (0 -- n)))
 
-;;
-sum_cube_odd 10
+let _ = sum_cube_odd 10
 
 (* Exercise: sum_cube_odd pipeline [✭✭] *)
 let sum_cube_odd_pipeline n =
@@ -74,14 +67,11 @@ let exists_fold p = List.fold_left (fun acc elt -> acc || p elt) false
 
 let exists_lib = List.exists
 
-;;
-assert (exists_rec (fun x -> x = 1) [ 0; 1; 3 ])
+let _ = assert (exists_rec (fun x -> x = 1) [ 0; 1; 3 ])
 
-;;
-assert (exists_fold (fun x -> x = 1) [ 0; 1; 3 ])
+let _ = assert (exists_fold (fun x -> x = 1) [ 0; 1; 3 ])
 
-;;
-assert (exists_lib (fun x -> x = 1) [ 0; 1; 3 ])
+let _ = assert (exists_lib (fun x -> x = 1) [ 0; 1; 3 ])
 
 (* Exercise: budget [✭✭✭] *)
 let budget_left budget = List.fold_left ( - ) budget
@@ -91,14 +81,11 @@ let budget_right budget expenses = budget - List.fold_right ( + ) expenses 0
 let rec budget_rec budget expenses =
   match expenses with [] -> budget | h :: t -> budget_rec budget t - h
 
-;;
-assert (budget_left 100 [ 1; 2; 3; 4; 5; 6 ] = 79)
+let _ = assert (budget_left 100 [ 1; 2; 3; 4; 5; 6 ] = 79)
 
-;;
-assert (budget_right 100 [ 1; 2; 3; 4; 5; 6 ] = 79)
+let _ = assert (budget_right 100 [ 1; 2; 3; 4; 5; 6 ] = 79)
 
-;;
-assert (budget_rec 100 [ 1; 2; 3; 4; 5; 6 ] = 79)
+let _ = assert (budget_rec 100 [ 1; 2; 3; 4; 5; 6 ] = 79)
 
 (* Exercise: library uncurried [✭✭] *)
 (* Exercise: uncurry [✭✭] *)
@@ -121,11 +108,9 @@ let f x = x + 1
 
 let g x = x + 2
 
-;;
-List.map f (List.map g [ 1; 2; 3 ])
+let _ = List.map f (List.map g [ 1; 2; 3 ])
 
-;;
-List.map (fun x -> x |> f |> g) [ 1; 2; 3 ]
+let _ = List.map (fun x -> x |> f |> g) [ 1; 2; 3 ]
 
 (* Exercise: more list fun [✭✭✭] *)
 
@@ -138,14 +123,11 @@ let join_strings strs sep =
     (fun acc elt -> if acc = "" then elt else acc ^ sep ^ elt)
     "" strs
 
-;;
-assert (greater_than_3 [ 5; 1; 3; 4; 2 ] = [ 5; 4 ])
+let _ = assert (greater_than_3 [ 5; 1; 3; 4; 2 ] = [ 5; 4 ])
 
-;;
-assert (add_one [ 5.0; 1.0; 3.0; 3.1; 2.0 ] = [ 6.; 2.; 4.; 4.1; 3. ])
+let _ = assert (add_one [ 5.0; 1.0; 3.0; 3.1; 2.0 ] = [ 6.; 2.; 4.; 4.1; 3. ])
 
-;;
-assert (join_strings [ "hi"; "bye" ] "," = "hi,bye")
+let _ = assert (join_strings [ "hi"; "bye" ] "," = "hi,bye")
 
 (* Exercise: tree map [✭✭✭] *)
 type 'a tree = Leaf | Node of 'a * 'a tree * 'a tree
@@ -162,13 +144,13 @@ let rec tree_map f = function
 
 let add1 = tree_map (fun x -> x + 1)
 
-;;
-assert (
-  add1 t
-  = Node
-      ( 5,
-        Node (2, Node (1, Leaf, Leaf), Node (3, Leaf, Leaf)),
-        Node (5, Node (6, Leaf, Leaf), Node (7, Leaf, Leaf)) ) )
+let _ =
+  assert (
+    add1 t
+    = Node
+        ( 5,
+          Node (2, Node (1, Leaf, Leaf), Node (3, Leaf, Leaf)),
+          Node (5, Node (6, Leaf, Leaf), Node (7, Leaf, Leaf)) ) )
 
 (* Exercise: association list keys [✭✭✭] *)
 (* let keys key_vals = key_vals |>  *)
