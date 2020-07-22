@@ -54,9 +54,10 @@ let _ = sum_cube_odd 10
 
 (* Exercise: sum_cube_odd pipeline [✭✭] *)
 let sum_cube_odd_pipeline n =
-  List.filter (fun x -> x mod 2 = 1) (0 -- n)
-  |> List.map (fun x -> x * x * x)
-  |> List.fold_left ( + ) 0
+  List.(
+    filter (fun x -> x mod 2 = 1) (0 -- n)
+    |> map (fun x -> x * x * x)
+    |> fold_left ( + ) 0)
 
 (* Exercise: exists [✭✭] *)
 let rec exists_rec p = function
