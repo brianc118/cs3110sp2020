@@ -1,4 +1,4 @@
-(* open Modules *)
+open Modules
 
 (* Exercise: complex synonym [✭] *)
 
