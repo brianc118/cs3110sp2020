@@ -97,3 +97,10 @@ let init_matrix sx sy f =
   res
 
 let m = init_matrix 5 5 (fun x y -> x + y)
+
+(* Exercise: doubly linked list [✭✭✭✭] *)
+include Dll
+
+let _ = create_node 3
+
+let _ = print_string "hi"
